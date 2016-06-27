@@ -81,7 +81,8 @@ As a custom Keyboard is usually lacking Dip-switches, we need another
 method to switch layouts.
 
 Therefore a layout selector layer is introduced by pressing
-<kbd>FN</kbd>+<kbd>\</kbd> **and** one of the following keys simultaneously:
+<kbd>FN</kbd>+<kbd>\\</kbd> **and** one of the following keys simultaneously:
+
 
 ```
 ,-----------------------------------------------------------.
@@ -105,7 +106,7 @@ Therefore a layout selector layer is introduced by pressing
 > Lw: Workman layout
 
 This is a permanet switch, until it is manually "reversed" to QWERTY via
-<kbd>Menu</kbd> + <kbd>\</kbd> + <kbd>ESC</kbd>
+<kbd>Menu</kbd> + <kbd>\\</kbd> + <kbd>ESC</kbd>
 
 ## HHKB
 
@@ -114,8 +115,7 @@ HHKB layout on the classic 60% keyboard (mostly by mapping `ESC` to `Capslock`
 and switching `Backspace` with `\`).
 
 It features a `vim` styled arrow cluster (`hjkl` movement) and a long pressed
-<kbd>;</:w
-kbd> function layer switch.
+<kbd>;</kbd> function layer switch.
 
 *Note: atm the source codes comments dont reflect the actual code*
 
