@@ -17,8 +17,8 @@ The displayed keyboard was assembled with:
 ## Pok3r
 
 The pok3r layout provided by tmk, does not represent the *original pok3r* layout.
-My [keymap](keymap_pokerorg.c) is a more native implementation of the *pok3r*
-based on hasu's idea.
+My [keymap](keymap_pokerorg.c) is a more native implementation of the *pok3r*,
+based on hasu's pok3r version.
 
 ### Default Layer
 
@@ -70,7 +70,7 @@ arrow cluster:
    ...       --------------------|
   ...        ,|  .|  /|   Up     |
           -----------------------|
-   Space    |Alt |Left|Down|Right|
+   Space    |FN0 |Left|Down|Right|
 ---------------------------------'
 ```
 
@@ -81,7 +81,7 @@ As a custom Keyboard is usually lacking Dip-switches, we need another
 method to switch layouts.
 
 Therefore a layout selector layer is introduced by pressing
-<kbd>FN</kbd> + <kbd>\\</kbd> **and** one of the following keys simultaneously:
+<kbd>Menu</kbd> + <kbd>\\</kbd> **and** one of the following keys simultaneously:
 
 
 ```
@@ -117,5 +117,5 @@ and switching `Backspace` with `\`).
 It features a `vim` styled arrow cluster (`hjkl` movement) and a long pressed
 <kbd>;</kbd> function layer switch.
 
-*Note: atm the source codes comments dont reflect the actual code*
+*Note: atm the source code comments dont reflect the actual code*
 
