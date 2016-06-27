@@ -81,7 +81,7 @@ As a custom Keyboard is usually lacking Dip-switches, we need another
 method to switch layouts.
 
 Therefore a layout selector layer is introduced by pressing
-<kbd>FN</kbd>+<kbd>\\</kbd> **and** one of the following keys simultaneously:
+<kbd>FN</kbd> + <kbd>\\</kbd> **and** one of the following keys simultaneously:
 
 
 ```
@@ -111,7 +111,7 @@ This is a permanet switch, until it is manually "reversed" to QWERTY via
 ## HHKB
 
 My *happy hacking 60%*-[layout](keymap_hh60.c) was a temporary solution to simulate a kind of
-HHKB layout on the classic 60% keyboard (mostly by mapping `ESC` to `Capslock`
+HHKB layout on the classic 60% keyboard (mostly by mapping `Control` to `Capslock`
 and switching `Backspace` with `\`).
 
 It features a `vim` styled arrow cluster (`hjkl` movement) and a long pressed
