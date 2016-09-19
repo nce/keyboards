@@ -12,6 +12,17 @@
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
+enum planck_keycodes {
+  QWERTY = SAFE_RANGE,
+  COLEMAK,
+  DVORAK,
+  PLOVER,
+  LOWER,
+  RAISE,
+  BACKLIT,
+  EXT_PLV
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -82,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [3] = {
   {_______, KC_MPRV, KC_MPLY, KC_MNXT, KC_WREF, _______, _______, _______, _______, _______, _______, _______},
   {_______, KC_VOLD, KC_VOLU, KC_MUTE, _______, _______, KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+  {_______, _______, _______, _______, _______, _______, QWERTY , _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, KC_PWR , KC_SLEP, _______, _______, _______, _______, _______, _______}
 },
 
@@ -91,11 +102,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM fn_actions[] = {
 };
 
+#ifdef AUDIO_ENABLE
+
+float tone_startup[][2]    = SONG(STARTUP_SOUND);
+float tone_qwerty[][2]    = SONG(DVORAK_SOUND);
+float tone_raise[][2]    = SONG(SCROLL_LOCK_ON_SOUND);
+float tone_lower[][2]    = SONG(SCROLL_LOCK_OFF_SOUND);
+float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
+
+float tone_goodbye[][2] = SONG(GOODBYE_SOUND);
+#endif
+
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   switch(id) {
     case 1:
       if (record->event.pressed) {
+        /* #ifdef AUDIO_ENABLE */
+        /*   PLAY_NOTE_ARRAY(tone_lower, false, 0); */
+        /* #endif */
         layer_on(1);
       } else {
         layer_off(1);
@@ -103,6 +128,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       break;
     case 2:
       if (record->event.pressed) {
+        /* #ifdef AUDIO_ENABLE */
+        /*   PLAY_NOTE_ARRAY(tone_raise, false, 0); */
+        /* #endif */
+
         layer_on(2);
       } else {
         layer_off(2);
@@ -112,14 +141,19 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
   return MACRO_NONE;
 };
 
-#ifdef AUDIO_ENABLE
 
-float tone_startup[][2]    = SONG(STARTUP_SOUND);
-float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
-
-float tone_goodbye[][2] = SONG(GOODBYE_SOUND);
-#endif
-
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QWERTY:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
+        #endif
+      }
+      break;
+      return false;
+  }
+}
 
 void matrix_init_user(void) {
     #ifdef AUDIO_ENABLE
