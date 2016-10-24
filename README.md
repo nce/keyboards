@@ -1,11 +1,11 @@
 # Custom Keyboards
 
-This is a collection of all my keyboard business.
+This is a collection of all my keyboards.
 
   * [GH60 China Clone](gh60-hx/README.md)
   * [Happy Hacking Keyboard](hhkb/README.md)
   * [Ergodox](ergodox/README.md)
-
+  * [Planck](planck/README.md)
 
 # DIY Usb Cable
 This is a reference for the parts i use to create DIY usb(2.0) cables.
