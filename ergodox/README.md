@@ -1,6 +1,8 @@
 Ergodox
 =======
 
+![Ergodox](docs/ergodox.jpg)
+
 ## Assembly
 
 All parts were ordered from [falbatech.pl](https://falbatech.pl):
@@ -9,7 +11,7 @@ All parts were ordered from [falbatech.pl](https://falbatech.pl):
   * Ergodox PCB set
   * Teensy 2.0
   * SMD electronics
-  * R2 78gr. Zealios switches (from [zealpc.net](https://zealpc.net/)
+  * R2 78gr. Zealios switches (from [zealpc.net](https://zealpc.net/))
   * PMK keycaps
 
 The board was assembled by myself and required quite a lot of soldering, but
@@ -43,6 +45,17 @@ $ make KEYMAP=nce teensy
 ```
 
 ## Keymap
+### German Umlauts on US Keyboard Layout
+On macOS there is no simple way to output german umlauts using the US Keyboard
+layout. Even when switching to Unicode and applying mac specific unicode
+combinations.
+
+Therefore i've utilized Macros simulating umlauts on the **US International**
+keyboard layout (<kbd>ALT</kbd> + <kbd>u</kbd>,
+<kbd>o</kbd> → ö)
+
+> Currently this doesn't support uppercase umlauts
+
 ### Default
 ```
  ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -70,19 +83,19 @@ $ make KEYMAP=nce teensy
 ,--------------------------------------------------.           ,--------------------------------------------------.
 |Version |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
 |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-|        | MPrv | MPly | Mnxt | Wref |      |      |           |      |      |      |      |      |      |   F12  |
+|        | MPrv | MPly | Mnxt | Wref |      |      |           |      |      |  ü   |      |  ö   |      |   F12  |
 |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-|        | VolD | VolU | Mute |      |      |------|           |------| Left | Down |  Up  | Rght |      |        |
+|        |  ä   |  ß   |  €   |      |      |------|           |------| Left | Down |  Up  | Rght |      |        |
 |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-|        |      |      |      |      |      |      |           |      |      | Mail |      |      |      |        |
+|        | VolD | VolU | Mute |      |      |      |           |      |      | Mail |      |      |      |        |
 `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
   |      |      |      |      |      |                                       |      |      |      |      |      |
   `----------------------------------'                                       `----------------------------------'
-                                      ,-------------.       ,-------------.
-                                      |      |      |       |      |      |
-                               ,------|------|------|       |------+------+------.
-                               |      |      |      |       |      |      |      |
-                               |      | PWR  |------|       |------| SLEP |      |
-                               |      |      |      |       |      |      |      |
-                               `--------------------'       `--------------------'
+                                       ,-------------.       ,-------------.
+                                       |      |      |       |      |      |
+                                ,------|------|------|       |------+------+------.
+                                |      |      |      |       |      |      |      |
+                                |      | PWR  |------|       |------| POWER|      |
+                                |      |      |      |       |      |      |      |
+                                `--------------------'       `--------------------'
 ```

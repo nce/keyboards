@@ -1,6 +1,8 @@
 Planck
 ======
 
+![Planck](docs/planck.jpg)
+
 ## Assembly
 
 The keyboard parts were purchased directly from Jack at [olkb.com](http://olkb.com).

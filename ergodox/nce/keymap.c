@@ -2,9 +2,21 @@
 #include "debug.h"
 #include "action_layer.h"
 
+#include "keymap_german.h"
+
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
+
+// Define macros for german umlauts
+#define MAE 1
+#define MUE 2
+#define MOE 3
+#define MSS 4
+#define MEURO 5
+#define MTILD 6
+
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -18,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|   [  |           |   ]  |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |   {  |           |   }  |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  (   |      |  `~  |  '"  | Lgui |                                       | Alt  |      |      |      |  )   |
+ *   |  (   |      |  ~   |  '"  | Lgui |                                       | Alt  |      |      |      |  )   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,--------------.
  *                                        | Del  |      |       |     |Ctrl/Esc|
@@ -36,8 +48,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   MO(SYMB),
         KC_LCTL,    KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,    KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LBRC,
-        LSFT(KC_9),    KC_TRNS,      KC_GRV, KC_QUOT,KC_LGUI,
-                                                        KC_DEL, KC_TRNS,
+        LSFT(KC_9),    KC_TRNS,   M(MTILD), KC_QUOT,KC_LGUI,
+                                                        KC_DEL, KC_LALT,
                                                               KC_HOME,
                                                     KC_BSPC,KC_ESC,KC_MINS,
         // right hand
@@ -55,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |Version |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        | MPrv | MPly | Mnxt | Wref |      |      |           |      |      |      |      |      |      |   F12  |
+ * |        | MPrv | MPly | Mnxt | Wref |      |      |           |      |      |  ü   |      |  ö   |      |   F12  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | VolD | VolU | Mute |      |      |------|           |------| Left | Down |  Up  | Rght |      |        |
+ * |        |  ä   |  ß   |  €   |      |      |------|           |------| Left | Down |  Up  | Rght |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      | Mail |      |      |      |        |
+ * |        | VolD | VolU | Mute |      |      |      |           |      |      | Mail |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -67,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 |      | PWR  |------|       |------| SLEP |      |
+ *                                 |      | PWR  |------|       |------| POWER|      |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
@@ -76,21 +88,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        // left hand
        M(0),   KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_TRNS,
        KC_TRNS,KC_MPRV,KC_MPLY,KC_MNXT,KC_WREF,KC_TRNS,KC_TRNS,
-       KC_TRNS,KC_VOLD,KC_VOLU,KC_MUTE,KC_TRNS,KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+       KC_TRNS,M(MAE) ,M(MSS) ,M(MEURO),KC_TRNS,KC_TRNS,
+       KC_TRNS,KC_VOLD,KC_VOLU,KC_MUTE,KC_TRNS,KC_TRNS,KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
                                KC_TRNS,KC_PWR,KC_TRNS,
        // right hand
        KC_TRNS,KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11,
-       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_F12,
+       KC_TRNS,KC_TRNS,M(MUE) ,KC_TRNS,M(MOE) ,KC_TRNS,KC_F12,
                KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,KC_TRNS,KC_TRNS,
        KC_TRNS,KC_TRNS,KC_MAIL,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
        KC_TRNS,KC_TRNS,
        KC_TRNS,
-       KC_TRNS,KC_SLEP,KC_TRNS
+       KC_TRNS,KC_POWER,KC_TRNS
 ),
 /* Keymap 2: Media and mouse keys
  *
@@ -139,6 +151,10 @@ const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
 
+enum macro_id {
+  UE,
+};
+
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
@@ -147,6 +163,25 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed) {
           SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
         }
+        case MUE:
+          return (record->event.pressed ? MACRO( D(LALT), T(U), U(LALT), T(U), END ) :
+              MACRO( END ) );
+        case MAE:
+          return (record->event.pressed ? MACRO( D(LALT), T(U), U(LALT), T(A), END ) :
+              MACRO( END ) );
+        case MOE:
+          return (record->event.pressed ? MACRO( D(LALT), T(U), U(LALT), T(O), END ) :
+              MACRO( END ) );
+        case MSS:
+          return (record->event.pressed ? MACRO( D(LALT), T(S), U(LALT), END ) :
+              MACRO( END ) );
+        case MEURO:
+          return (record->event.pressed ? MACRO( D(LALT), D(LSFT), T(2), U(LALT), U(LSFT), END ) :
+              MACRO( END ) );
+        case MTILD:
+          return (record->event.pressed ? MACRO( D(LSFT), T(GRV), U(LSFT), T(SPC),END ) :
+              MACRO( END ) );
+
         break;
       }
     return MACRO_NONE;
