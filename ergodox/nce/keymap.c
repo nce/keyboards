@@ -15,7 +15,8 @@
 #define MSS 4
 #define MEURO 5
 #define MTILD 6
-
+#define COPA 7
+#define MQUO 8
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -33,9 +34,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |  (   |      |  ~   |  '"  | Lgui |                                       | Alt  |      |      |      |  )   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,--------------.
- *                                        | Del  |      |       |     |Ctrl/Esc|
+ *                                        | Del  | Alt  |       |     |Ctrl/Esc|
  *                                 ,------|------|------|       |------+-------+-------.
- *                                 |      |      | Home |       | MDIA |       |       |
+ *                                 |      |      | Copy |       | MDIA |       |       |
  *                                 | Back |  Esc |------|       |------| Enter | Space |
  *                                 | spac |      |  -   |       |   =  |       |       |
  *                                 `--------------------'       `----------------------'
@@ -50,12 +51,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,    KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LBRC,
         LSFT(KC_9),    KC_TRNS,   M(MTILD), KC_QUOT,KC_LGUI,
                                                         KC_DEL, KC_LALT,
-                                                              KC_HOME,
+                                                              M(COPA),
                                                     KC_BSPC,KC_ESC,KC_MINS,
         // right hand
         KC_RGHT,    KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
         MO(SYMB),   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
-                    KC_H,   KC_J,   KC_K,   KC_L,   LT(SYMB, KC_SCLN),KC_QUOT,
+                    KC_H,   KC_J,   KC_K,   KC_L,   LT(SYMB, KC_SCLN),M(MQUO),
         KC_RBRC,    KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH, KC_RSFT,
                     KC_LALT,KC_TAB, KC_TRNS,KC_TRNS,          RSFT(KC_0),
         KC_TRNS,    CTL_T(KC_ESC),
@@ -155,6 +156,7 @@ enum macro_id {
   UE,
 };
 
+static uint16_t key_timer;
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
@@ -181,6 +183,26 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case MTILD:
           return (record->event.pressed ? MACRO( D(LSFT), T(GRV), U(LSFT), T(SPC),END ) :
               MACRO( END ) );
+        case COPA:
+          if (record->event.pressed) {
+            key_timer = timer_read(); // if the key is being pressed, we start the timer.
+          } else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
+            if (timer_elapsed(key_timer) > 150) { // 150 being 150ms, the threshhold we pick for counting something as a tap.
+              return MACRO( D(LGUI), T(C), U(LGUI), END  );
+            } else {
+              return MACRO( D(LGUI), T(V), U(LGUI), END  );
+            }
+          }
+        case MQUO:
+          if (record->event.pressed) {
+            key_timer = timer_read(); // if the key is being pressed, we start the timer.
+          } else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
+            if (timer_elapsed(key_timer) > 150) { // 150 being 150ms, the threshhold we pick for counting something as a tap.
+              return MACRO( D(LSFT), T(QUOT), U(LSFT), T(SPC), END  );
+            } else {
+              return MACRO( T(QUOT), T(SPC), END  );
+            }
+          }
 
         break;
       }
