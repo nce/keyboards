@@ -9,14 +9,16 @@
 #define MDIA 2 // media keys
 
 // Define macros for german umlauts
-#define MAE 1
-#define MUE 2
-#define MOE 3
-#define MSS 4
-#define MEURO 5
-#define MTILD 6
-#define COPA 7
-#define MQUO 8
+// On macOS with U.S. International layout
+#define MAE 1     // ä
+#define MUE 2     // ü
+#define MOE 3     // ö
+#define MSS 4     // ß
+#define MEURO 5   // €
+#define MTILD 6   // ~
+#define COPA 7    // paste on shortpress; copy on long
+#define MQUO 8    // ' on shortpress; " on long
+#define MGRV 9    // `
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -31,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|   [  |           |   ]  |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |   {  |           |   }  |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  (   |      |  ~   |  '"  | Lgui |                                       | Alt  |      |      |      |  )   |
+ *   |  (   |   `  |  ~   |  '"  | Lgui |                                       | Alt  | Tab  |      |      |  )   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,--------------.
  *                                        | Del  | Alt  |       |     |Ctrl/Esc|
@@ -49,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   MO(SYMB),
         KC_LCTL,    KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,    KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LBRC,
-        LSFT(KC_9),    KC_TRNS,   M(MTILD), KC_QUOT,KC_LGUI,
+        LSFT(KC_9), M(MGRV),   M(MTILD), KC_QUOT,KC_LGUI,
                                                         KC_DEL, KC_LALT,
                                                               M(COPA),
                                                     KC_BSPC,KC_ESC,KC_MINS,
@@ -182,6 +184,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
               MACRO( END ) );
         case MTILD:
           return (record->event.pressed ? MACRO( D(LSFT), T(GRV), U(LSFT), T(SPC),END ) :
+              MACRO( END ) );
+        case MGRV:
+          return (record->event.pressed ? MACRO( T(GRV), T(SPC),END ) :
               MACRO( END ) );
         case COPA:
           if (record->event.pressed) {
