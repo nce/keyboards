@@ -8,6 +8,7 @@
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
 #define ONEH 3 // one hand layout
+#define SC2 4  // sc2 layout
 
 // Define macros for german umlauts
 // On macOS with U.S. International layout
@@ -20,6 +21,7 @@
 #define COPA 7    // paste on shortpress; copy on long
 #define MQUO 8    // ' on shortpress; " on long
 #define MGRV 9    // `
+#define CTRLALTDEL 10    // ctrl alt del
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -28,8 +30,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | Esc    |   1  |   2  |   3  |   4  |   5  |  =   |           | RIGHT|   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  | Layer|           |  L1  |   Y  |   U  |   I  |   O  |   P  |   \    |
- * |--------+------+------+------+------+------| ONEH |           |      |------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           | Layer|   Y  |   U  |   I  |   O  |   P  |   \    |
+ * |--------+------+------+------+------+------|      |           | ONEH |------+------+------+------+------+--------|
  * | Ctrl   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|   '    |
  * |--------+------+------+------+------+------|   [  |           |   ]  |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |   {  |           |   }  |   N  |   M  |   ,  |   .  |   /  | RShift |
@@ -49,16 +51,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_ESC,     KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_EQL,
-        KC_TAB,     KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TG(ONEH),
+        KC_TAB,     KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_EQL,
         KC_LCTL,    KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,    KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LBRC,
         LSFT(KC_9), M(MGRV),   M(MTILD), KC_QUOT,KC_LGUI,
-                                                        KC_DEL, KC_LALT,
+                                                        KC_DEL, M(CTRLALTDEL),
                                                               M(COPA),
                                                     KC_BSPC,KC_ESC,KC_MINS,
         // right hand
         KC_RGHT,    KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
-        MO(SYMB),   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
+        TO(ONEH),   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
                     KC_H,   KC_J,   KC_K,   KC_L,   LT(SYMB, KC_SCLN),M(MQUO),
         KC_RBRC,    KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH, KC_RSFT,
                     KC_LALT,KC_TAB, KC_TRNS,KC_TRNS,          RSFT(KC_0),
@@ -141,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_SPC,KC_ESC,KC_MINS,
         // right hand
         KC_MINS,    KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
-        MO(SYMB),   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
+        TO(SC2),   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
                     KC_H,   KC_J,   KC_K,   KC_L,   LT(SYMB, KC_SCLN),M(MQUO),
         KC_RBRC,    KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH, KC_RSFT,
                     KC_LALT,KC_TAB, KC_TRNS,KC_TRNS,          RSFT(KC_0),
@@ -190,6 +192,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_WBAK
 ),
+
+// sc2 map
+[SC2] = KEYMAP(
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_6,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,
+                                           KC_TRNS, KC_TRNS,
+                                                    KC_TRNS,
+                                  KC_TRNS, KC_TRNS, KC_TRNS,
+    // right hand
+       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       TO(BASE),  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,
+       KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS
+),
+
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -245,12 +269,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             key_timer = timer_read(); // if the key is being pressed, we start the timer.
           } else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
             if (timer_elapsed(key_timer) > 150) { // 150 being 150ms, the threshhold we pick for counting something as a tap.
-              return MACRO( D(LSFT), T(QUOT), U(LSFT), T(SPC), END  );
+              return MACRO( D(LSFT), T(QUOT), U(LSFT), END  );
+              //return MACRO( D(LSFT), T(QUOT), U(LSFT), T(SPC), END  );
             } else {
-              return MACRO( T(QUOT), T(SPC), END  );
+              return MACRO( T(QUOT), END  );
+              /* return MACRO( T(QUOT), T(SPC), END  ); */
             }
           }
-
+        case CTRLALTDEL:
+          return (record->event.pressed ? MACRO( D(LALT), D(LCTRL), D(DEL), U(LALT), U(LCTRL), U(DEL), END ) :
+           MACRO( END ) );
         break;
       }
     return MACRO_NONE;
